@@ -1,0 +1,4 @@
+name: DreamPrivada
+main: net.perfectdreams.dreamprivada.DreamPrivada
+version: 1.0.0
+softdepend: ["DreamCore"]
