@@ -79,19 +79,8 @@ Nós utilizamos várias [dependências no código-fonte](https://github.com/Perf
 | Nome  | Mantenedor |
 | ------------- | ------------- |
 | [Kotlin](https://kotlinlang.org/) | JetBrains  |
-| [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines) | JetBrains  |
 | [Paper](https://github.com/PaperMC/Paper) | Mojang ([Minecraft Vanilla](https://minecraft.net/pt-br/download/server)), SpigotMC ([Spigot](https://www.spigotmc.org/)), Paper |
-| [WorldEdit](https://github.com/sk89q/WorldEdit) | sk89q  |
-| [WorldGuard](https://github.com/sk89q/WorldGuard) | sk89q  |
-| [ProtocolSupport](https://github.com/ProtocolSupport/ProtocolSupport) |  Shevchik, 7kasper, MrPowerGamerBR, BrettplayMC, EntryPointKR, BeYkeRYkt |
-| [ProtocolLib](https://github.com/aadnk/ProtocolLib) | dmulloy2, aadnk|
-| [VaultAPI](https://github.com/MilkBowl/VaultAPI) |  Sleaker, cerea1, mung3r |
-| [LangUtils](https://github.com/MascusJeoraly/LanguageUtils) |  Meow J, hexosse, Raspen0 |
-| [MongoDB Java Driver](https://github.com/mongodb/mongo-java-driver) |  MongoDB  |
-| [Http Request](https://github.com/kevinsawicki/http-request) |  kevinsawicki |
-| [Skedule](https://github.com/okkero/Skedule) | okkero |
-| [jBCrypt](https://github.com/jeremyh/jBCrypt) | jeremyh |
-| [Kotson](https://github.com/SalomonBrys/Kotson) | SalomonBrys |
+| [DreamCore](https://github.com/PerfectDreams/DreamCore) | MrPowerGamerBR |
 
 ## 📄 Licença
 
