@@ -1,5 +1,4 @@
 <p align="center">
-<br>
 <img src="https://perfectdreams.net/assets/img/perfectdreams_logo.png">
 <br>
 <a href="https://perfectdreams.net/"><img src="https://perfectdreams.net/assets/img/perfectdreams_badge.png?v2"></a>
@@ -74,13 +73,13 @@ Você precisa pensar "será que alguém iria utilizar isto?", se você criar um 
 
 ## 📦 Dependências
 
-Nós utilizamos várias [dependências no código-fonte](https://github.com/PerfectDreams/DreamPrivada/blob/master/pom.xml) deste projeto, obrigado a todos os mantenedores das dependências! Sem vocês, talvez nosso projeto não iria existir (ou teria várias funcionalidades reduzidas ou talvez até inexistentes!)
+Nós utilizamos várias [dependências no código-fonte](https://github.com/PerfectDreams/DreamBrisa/blob/master/pom.xml) deste projeto, obrigado a todos os mantenedores das dependências! Sem vocês, talvez nosso projeto não iria existir (ou teria várias funcionalidades reduzidas ou talvez até inexistentes!)
 
 | Nome  | Mantenedor |
 | ------------- | ------------- |
 | [Kotlin](https://kotlinlang.org/) | JetBrains  |
 | [Paper](https://github.com/PaperMC/Paper) | Mojang ([Minecraft Vanilla](https://minecraft.net/pt-br/download/server)), SpigotMC ([Spigot](https://www.spigotmc.org/)), Paper |
-| [DreamCore](https://github.com/PerfectDreams/DreamCore) | MrPowerGamerBR |
+| [DreamCore](https://github.com/PerfectDreams/DreamCore) | MrPowerGamerBR  |
 
 ## 📄 Licença
 

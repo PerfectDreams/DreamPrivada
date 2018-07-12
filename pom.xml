@@ -22,10 +22,14 @@
         </repository>
         <repository>
             <id>perfectdreams-repo</id>
-            <url>https://raw.githubusercontent.com/PerfectDreams/DreamMavenRepository/master/</url>
+            <url>https://repo.perfectdreams.net/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
-	
+
     <dependencies>
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
@@ -40,15 +44,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.PerfectDreams</groupId>
+            <groupId>net.perfectdreams.dreamcore</groupId>
             <artifactId>DreamCore</artifactId>
-            <version>73989caac8</version>
+            <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
-		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
