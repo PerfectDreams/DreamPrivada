@@ -1,17 +1,14 @@
 package net.perfectdreams.dreamprivada
 
 import com.okkero.skedule.schedule
-import net.perfectdreams.dreamcore.utils.KotlinPlugin
-import net.perfectdreams.dreamcore.utils.LocationUtils
-import net.perfectdreams.dreamcore.utils.getStorageData
-import net.perfectdreams.dreamcore.utils.lore
-import net.perfectdreams.dreamcore.utils.registerEvents
-import net.perfectdreams.dreamcore.utils.rename
-import net.perfectdreams.dreamcore.utils.scheduler
-import net.perfectdreams.dreamcore.utils.setStorageData
+import net.perfectdreams.dreamcore.utils.*
+import net.perfectdreams.dreamcore.utils.extensions.getStoredMetadata
+import net.perfectdreams.dreamcore.utils.extensions.storeMetadata
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.block.BlockFace
+import org.bukkit.block.data.Levelled
+import org.bukkit.block.data.Waterlogged
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -25,10 +22,6 @@ import org.bukkit.potion.PotionEffectType
 import java.util.*
 
 class DreamPrivada : KotlinPlugin(), Listener {
-	companion object {
-		val NECESSIDADES_ITEM_KEY = UUID.fromString("687d1fcb-718c-43de-a8bc-ba8fc8c2ff4c")
-	}
-
 	val inToilet = Collections.newSetFromMap(WeakHashMap<Player, Boolean>())
 
 	override fun softEnable() {
@@ -50,7 +43,6 @@ class DreamPrivada : KotlinPlugin(), Listener {
 		val player = e.player
 
 		if (isInAPrivada(player) && !inToilet.contains(player)) {
-			player.sendMessage("§aFazendo necessidades...")
 			inToilet.add(player)
 			scheduler().schedule(this) {
 				waitFor(1) // Isto é necessário já que player.isSneaking retornará false caso não esperar
@@ -70,10 +62,10 @@ class DreamPrivada : KotlinPlugin(), Listener {
 				inToilet.remove(player)
 
 				val water = player.location.block.getRelative(BlockFace.DOWN)
-				val necessidades = ItemStack(Material.INK_SACK, 1, 3.toShort())
+				val necessidades = ItemStack(Material.COCOA_BEANS, 1)
 						.rename("§8§lNecessidades")
 						.lore("§7Se eu fosse você, eu não", "§7cheirava isto...", "§7", "§7Necessidades de §b${player.displayName}")
-						.setStorageData("poop", NECESSIDADES_ITEM_KEY)
+						.storeMetadata("poop", "true")
 
 				player.world.dropItemNaturally(water.location.add(0.5, 0.5, 0.5), necessidades)
 			}
@@ -96,21 +88,24 @@ class DreamPrivada : KotlinPlugin(), Listener {
 
 			val trap = button.getRelative(face)
 
-			if (trap.type == Material.TRAP_DOOR) {
+			if (trap.type == Material.OAK_TRAPDOOR) {
 				val water = trap.getRelative(BlockFace.DOWN)
 
-				if (water.type == Material.STATIONARY_WATER && water.data == 0.toByte()) {
+				if (water.type == Material.WATER && water.data == 0.toByte()) {
 					e.isCancelled = true
 					e.player.sendMessage("§7*sons de privada*")
 					scheduler().schedule(this) {
+						val levelled = water.blockData as Levelled
 						for (idx in 0..6) {
-							water.data = idx.toByte()
+							levelled.level = idx
+							water.blockData = levelled
 							waitFor(5)
 						}
 						for (idx in 6 downTo 0) {
-							water.data = idx.toByte()
+							levelled.level = idx
 							waitFor(5)
 						}
+						water.blockData = levelled
 					}
 				}
 			}
@@ -122,7 +117,7 @@ class DreamPrivada : KotlinPlugin(), Listener {
 		val item = e.player.inventory.getItem(e.newSlot)
 
 		if (item != null && item.type != Material.AIR) {
-			val data = item.getStorageData(NECESSIDADES_ITEM_KEY)
+			val data = item.getStoredMetadata("poop")
 
 			if (data != null) {
 				e.player.removePotionEffect(PotionEffectType.CONFUSION)
@@ -135,12 +130,15 @@ class DreamPrivada : KotlinPlugin(), Listener {
 	fun isInAPrivada(player: Player): Boolean {
 		val block = player.location.block
 
-		if (block.type == Material.TRAP_DOOR && block.getRelative(BlockFace.DOWN).type == Material.STATIONARY_WATER) {
+		if (block.type == Material.OAK_TRAPDOOR && block.getRelative(BlockFace.DOWN).type == Material.WATER) {
 			val face = LocationUtils.yawToFace((player.location.yaw + 90) % 360, true).oppositeFace
 
-			if (block.getRelative(face).type == Material.QUARTZ_BLOCK)
+			player.sendMessage(block.getRelative(face).type.toString())
+
+			if (block.getRelative(face).type == Material.SMOOTH_QUARTZ)
 				return true
 		}
+
 		return false
 	}
 }
