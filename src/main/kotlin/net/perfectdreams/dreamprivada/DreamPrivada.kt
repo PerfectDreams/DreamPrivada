@@ -43,6 +43,7 @@ class DreamPrivada : KotlinPlugin(), Listener {
 		val player = e.player
 
 		if (isInAPrivada(player) && !inToilet.contains(player)) {
+			player.sendMessage("§aFazendo necessidades...")
 			inToilet.add(player)
 			scheduler().schedule(this) {
 				waitFor(1) // Isto é necessário já que player.isSneaking retornará false caso não esperar
@@ -132,8 +133,6 @@ class DreamPrivada : KotlinPlugin(), Listener {
 
 		if (block.type == Material.OAK_TRAPDOOR && block.getRelative(BlockFace.DOWN).type == Material.WATER) {
 			val face = LocationUtils.yawToFace((player.location.yaw + 90) % 360, true).oppositeFace
-
-			player.sendMessage(block.getRelative(face).type.toString())
 
 			if (block.getRelative(face).type == Material.SMOOTH_QUARTZ)
 				return true
