@@ -128,6 +128,17 @@ class DreamPrivada : KotlinPlugin(), Listener {
 		}
 	}
 
+	@EventHandler
+	fun onInteract(e: PlayerInteractEvent) {
+		val item = e.player.itemOnCursor
+
+		val data = item.getStoredMetadata("poop")
+		if (data != null && data == "true") {
+			e.isCancelled = true
+			e.player.sendMessage("§cPor que você está tentando usar fezes? Joga isso fora!")
+		}
+	}
+
 	fun isInAPrivada(player: Player): Boolean {
 		val block = player.location.block
 
